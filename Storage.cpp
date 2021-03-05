@@ -51,8 +51,8 @@ namespace StackParser {
 				}
 				else {
 					cur = tree.InsertItem(s2cs(line), treeStack.top());
+					tree.Expand(treeStack.top(), TVE_EXPAND);
 				}
-
 				treeStack.emplace(cur);
 				line.clear();
 				indent = 0;

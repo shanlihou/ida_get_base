@@ -99,6 +99,7 @@ namespace StackParser
 				SelectDropTarget(NULL);                       //取消移入Item的选中状态
 				m_hBeginDrag = NULL;
 			}
+			StackParser::saveTreeCtrl(*this);
 		}
 	}
 

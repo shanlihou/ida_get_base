@@ -35,6 +35,7 @@ BEGIN_MESSAGE_MAP(StackInfo, CDialogEx)
 	ON_BN_CLICKED(IDC_BUTTON1, &StackInfo::OnClickedTest)
 	ON_NOTIFY(NM_CLICK, IDC_STACK_TREE, &StackInfo::OnClickStackTree)
 	ON_BN_CLICKED(IDC_BUTTON_ADD, &StackInfo::OnBnClickedButtonAdd)
+	ON_BN_CLICKED(IDC_BUTTON_DEL, &StackInfo::OnBnClickedButtonDel)
 END_MESSAGE_MAP()
 
 
@@ -111,6 +112,24 @@ void StackInfo::OnBnClickedButtonAdd()
 		qsnprintf(buf, 128, "0x%x-%s", ea, buffer.c_str());
 		CString oprStr(buf);
 		m_stackTree.InsertItem(oprStr, m_lastHItem);
+		m_stackTree.Expand(m_lastHItem, TVE_EXPAND);
 		StackParser::saveTreeCtrl(m_stackTree);
 	}
+}
+
+
+void StackInfo::OnBnClickedButtonDel()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	auto sel = m_stackTree.GetSelectedItem();
+	if (!sel) {
+		return;
+	}
+
+	if (isFrameItem(sel)) {
+		return;
+	}
+
+	m_stackTree.DeleteItem(sel);
+	StackParser::saveTreeCtrl(m_stackTree);
 }

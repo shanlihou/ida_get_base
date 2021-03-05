@@ -37,4 +37,5 @@ private:
 	HTREEITEM m_lastHItem;
 public:
 	CEdit stackStrEdit;
+	afx_msg void OnBnClickedButtonDel();
 };
