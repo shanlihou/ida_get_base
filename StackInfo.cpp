@@ -95,6 +95,13 @@ void StackInfo::OnClickStackTree(NMHDR* pNMHDR, LRESULT* pResult)
 			jumpto(ea);
 			m_lastHItem = hItem;
 		}
+		else {
+			CString text = m_stackTree.GetItemText(hItem);
+			string _s = StackParser::cs2s(text);
+			auto vs = StackParser::explode(_s, string("-"));
+			auto ea = StackParser::getAddrByStr(vs[0]);
+			jumpto(ea);
+		}
 		*pResult = 0;
 	}
 }
